@@ -390,7 +390,7 @@ local function PartsRepellent()
             local dist = (part.Position - origin).Magnitude
 
             if dist > radius then
-                bodyVelocity:Destroy()
+                bodyVelocity:Destroy() -- ts doesnt really works as intended. it still keeps moving forward (yes, ik how to fix it. just set the velocity and max force to 0 (i think))
                 bodyVelocities[part] = nil
             end
         end
