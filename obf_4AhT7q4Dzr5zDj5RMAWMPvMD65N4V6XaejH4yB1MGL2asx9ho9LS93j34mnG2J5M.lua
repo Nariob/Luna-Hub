@@ -159,7 +159,7 @@ local Joints = {}
 local function ForcePart(part)
 	if not part or not part:IsA("BasePart") then return end
     if part.Anchored then return end
-    if part.Parent:FindFirstChildOfClass("Humanoid") then return end
+    if part.Parent:FindFirstChildOfClass("Humanoid") then return end --ts is kinda useless, but im too lazy to change it so it works.
     if ForcedParts[part] then return end
 
 	for _, obj in ipairs(part:GetChildren()) do
