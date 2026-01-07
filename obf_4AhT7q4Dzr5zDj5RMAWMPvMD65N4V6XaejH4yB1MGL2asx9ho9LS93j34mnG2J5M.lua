@@ -148,13 +148,14 @@ local function ChangeCollisionOfModel(model, state)
 end
 
 -- Network stuff
+-- this was directly taken from luka superring lol, credits to him
 getgenv().Network = getgenv().Network or {}
 Network.Parts = Network.Parts or {}
 Network.Velocity = Vector3.new(15,15,15)
 
 local ForcedParts = {}
 local Joints = {}
-
+-- modified function from luka superring
 local function ForcePart(part)
 	if not part or not part:IsA("BasePart") then return end
     if part.Anchored then return end
