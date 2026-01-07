@@ -570,7 +570,7 @@ end)]]
     MoveAllParts(root.CFrame)
 end)]]
 
-if game.GameId == 7326934954 then
+--[[if game.GameId == 7326934954 then
     local NightsTab = Tab(MainWindow, "99 Nights")
 	local CampFire = game:GetService("Workspace"):FindFirstChild("Map"):FindFirstChild("Campground"):FindFirstChild("MainFire")
 	local Items = game:GetService("Workspace"):FindFirstChild("Items")
@@ -594,3 +594,4 @@ if game.GameId == 7326934954 then
         end
     end)
 end
+]]
