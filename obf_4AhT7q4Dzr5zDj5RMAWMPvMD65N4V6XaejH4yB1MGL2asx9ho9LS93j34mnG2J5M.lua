@@ -232,7 +232,7 @@ local function ForcePart(part)
 end
 
 RunService.Heartbeat:Connect(function()
-	sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+	sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge) -- this doesnt change a thing, but it doesnt hurt noone, so im just leaving it there (also, it should use setsimulationradius. i was half asleep when i did this)
 	for _, part in pairs(Network.Parts) do
 		if part:IsDescendantOf(Workspace) then
 			part.Velocity = Network.Velocity
@@ -241,14 +241,14 @@ RunService.Heartbeat:Connect(function()
 end)
 
 local TelekinesisEnabled = false
-local TelekinesisConn, MouseDownConn, MouseUpConn, InputConn
+local TelekinesisConn, MouseDownConn, MouseUpConn, InputConn -- im too lazy to use the Connect function above, i made the telekinesis before adding that.
 local Mouse = LocalPlayer:GetMouse()
 local HeldPart = nil
 local HeldModel = nil
 
 local Spinning = false
 
-local function EnableTelekinesis()
+local function EnableTelekinesis() -- this function has 1000 gazillion stuff it doesnt need (like HeldPart). again, i was half asleep when i did this
     local TelekinesisDistance = 25
     local MinDistance = 10
     local MaxDistance = 900
@@ -306,7 +306,7 @@ local function EnableTelekinesis()
 		TelekinesisConn = RunService.Heartbeat:Connect(function()
             if not TelekinesisEnabled or not HeldPart:IsDescendantOf(Workspace) then return end
 			if not isnetworkowner(HeldPart) then
-				sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+				sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge) -- again, useless, it should use setsimulationradius (and its capped to 1000, thats why its useless)
 			end
 			local ray = Camera:ScreenPointToRay(Mouse.X, Mouse.Y)
 			local goalPos = ray.Origin + ray.Direction * TelekinesisDistance
@@ -370,7 +370,7 @@ local function PartsRepellent()
 
         local region = Region3.new(origin - Vector3.new(radius, radius, radius), origin + Vector3.new(radius, radius, radius))
 
-        local partsInRadius = workspace:FindPartsInRegion3(region, nil, math.huge)
+        local partsInRadius = workspace:FindPartsInRegion3(region, nil, math.huge) -- i should use getpartsinboundradius or smth like that, i dont remember how its called
 
         for _, part in pairs(partsInRadius) do
             if not part.Anchored and not part:IsDescendantOf(getChar(LocalPlayer)) then
@@ -453,7 +453,7 @@ if replicatesignal then
 end
 
 --Players stuff
-
+-- holy unoptimized code
 local PlayerTab = Tab(MainWindow, "Player")
 
 local selectedPlayer = nil
@@ -476,6 +476,7 @@ Players.PlayerRemoving:Connect(function()
 end)
 
 --Local player stuff
+-- even more unoptimized
 local LocalPlayerTab = Tab(MainWindow, "Local player")
 
 local Speed
@@ -571,7 +572,7 @@ end)]]
     MoveAllParts(root.CFrame)
 end)]]
 
---[[if game.GameId == 7326934954 then
+--[[if game.GameId == 7326934954 then -- i did this like a month ago, forgot about it and i dont want to touch it. i also have code for another game in another hub i made for me, im not adding it here cause the devs and mods from that game are my friends :)
     local NightsTab = Tab(MainWindow, "99 Nights")
 	local CampFire = game:GetService("Workspace"):FindFirstChild("Map"):FindFirstChild("Campground"):FindFirstChild("MainFire")
 	local Items = game:GetService("Workspace"):FindFirstChild("Items")
