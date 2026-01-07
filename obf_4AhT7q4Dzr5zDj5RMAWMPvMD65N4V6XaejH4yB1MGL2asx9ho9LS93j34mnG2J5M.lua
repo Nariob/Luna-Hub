@@ -296,7 +296,7 @@ local function EnableTelekinesis()
             end
         end]]
         HeldPart = part
-        for _, joint in pairs(HeldPart:GetJoints()) do
+        for _, joint in pairs(HeldPart:GetJoints()) do -- this is so velocity from the heartbeat above doesnt affect us, but it removes model support (and also makes parts u cant grab cause it isnt updated in the server)
             if not table.find(Joints, joint) then
                 joint.Enabled = false
            end
