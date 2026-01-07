@@ -1,12 +1,596 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Camera = game:GetService("Workspace").CurrentCamera
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-]]--
+local function getChar(player) if player and player.Character then return player.Character end end
+local function getRoot(player) if getChar(player) and getChar(player):FindFirstChild("HumanoidRootPart") then return getChar(player):FindFirstChild("HumanoidRootPart") end end
+local function getHumanoid(player) if getChar(player) and getChar(player):FindFirstChild("Humanoid") then return getChar(player):FindFirstChild("Humanoid") end end
+local function isAlive(player) if getHumanoid(player).Health > 0 then return true end return false end
+local function isInstOf(v, ...) for i=1,select("#",...) do if v:IsA(select(i,...)) then return true end end return false end
 
-local v0=game:GetService("RunService");local v1=game:GetService("UserInputService");local v2=game:GetService("Players");local v3=v2.LocalPlayer;local v4=game:GetService("Workspace").CurrentCamera;local v5=game:GetService("ReplicatedStorage");local function v6(v68) if (v68 and v68.Character) then return v68.Character;end end local function v7(v69) if (v6(v69) and v6(v69):FindFirstChild("HumanoidRootPart")) then return v6(v69):FindFirstChild("HumanoidRootPart");end end local function v8(v70) if (v6(v70) and v6(v70):FindFirstChild("Humanoid")) then return v6(v70):FindFirstChild("Humanoid");end end local function v9(v71) local v72=0 -0 ;while true do if (v72==(0 + 0)) then if (v8(v71).Health>(0 -0)) then return true;end return false;end end end local function v10(v73,...) for v174=1 + 0 ,select("#",...) do if v73:IsA(select(v174,...)) then return true;end end return false;end local v11={};local function v12(v74,v75,v76) if v11[v74] then v11[v74]:Disconnect();end v11[v74]=v75:Connect(v76);end local function v13(v78) if v11[v78] then v11[v78]:Disconnect();v11[v78]=nil;end end local function v14() for v175,v176 in pairs(v11) do v176:Disconnect();end table.clear(v11);end local function v15(v79) local v80=0;local v81;while true do if (v80==(3 -1)) then wait(v81);replicatesignal(v3.Kill);break;end if (v80==(1081 -(1020 + 60))) then if v79 then v81=v2.RespawnTime + (1423.1 -(630 + 793)) ;else v81=v2.RespawnTime-(0.1 -0) ;end replicatesignal(v3.ConnectDiedSignalBackend);v80=2;end if (v80==(0 -0)) then v81=nil;if (v79==nil) then replicatesignal(v3.ConnectDiedSignalBackend);end v80=1;end end end local function v16() local v82=0 + 0 ;local v83;while true do if (1==v82) then for v239,v240 in pairs(v2:GetPlayers()) do table.insert(v83,v240.Name);end return v83;end if (v82==(0 -0)) then v83={};table.clear(v83);v82=1748 -(760 + 987) ;end end end local function v17(v84) v4.CameraSubject=v84;end local v18=loadstring(game:HttpGet("https://sirius.menu/rayfield"))();local function v19(v86,v87,v88,v89) v18:Notify({Title=v86,Content=v87,Duration=v88,Image=v89});end local function v20(v90,v91,v92,v93,v94,v95,v96) local v97=1913 -(1789 + 124) ;local v98;while true do if (v97==(766 -(745 + 21))) then v98=v18:CreateWindow({Name=v90,Icon=v91,LoadingTitle=v92,LoadingSubtitle=v93,ShowText=v94,Theme=v95,ToggleUIKeybind=v96});return v98;end end end local function v21(v99,v100,v101) local v102=0;local v103;while true do if (v102==0) then if  not v101 then v101=nil;end v103=v99:CreateTab(v100,v101);v102=1;end if (v102==(1 + 0)) then return v103;end end end local function v22(v104,v105,v106) local v107=v104:CreateButton({Name=v105,Callback=v106});return v107;end local function v23(v108,v109,v110,v111,v112) local v113=0 -0 ;local v114;while true do if (v113==(0 -0)) then v114=v108:CreateToggle({Name=v109,CurrentValue=v110,Flag=v111,Callback=v112});return v114;end end end local function v24(v115,v116,v117,v118,v119,v120,v121,v122) local v123=v115:CreateSlider({Name=v116,Range=v117,Increment=v118,Suffix=v119,CurrentValue=v120,Flag=v121,Callback=v122});return v123;end local function v25(v124,v125,v126,v127,v128,v129,v130) local v131=v124:CreateDropdown({Name=v125,Options=v126,CurrentOption=v127,MultipleOptions=v128,Flag=v129,Callback=v130});return v131;end local function v26(v132,v133) local v134=0 + 0 ;while true do if (v134==(0 + 0)) then if  not v132:IsA("Model") then return;end for v241,v242 in pairs(v132:GetDescendants()) do if v242:IsA("BasePart") then local v267=1055 -(87 + 968) ;while true do if (v267==0) then v242.CanCollide=v133;v242.CanQuery=v133;v267=4 -3 ;end if ((1 + 0)==v267) then v242.CanTouch=v133;break;end end end end break;end end end getgenv().Network=getgenv().Network or {} ;Network.Parts=Network.Parts or {} ;Network.Velocity=Vector3.new(0.5 -0 ,0.5,0.5);local v30={};local v31={};local function v32(v135) local v136=1413 -(447 + 966) ;local v137;local v138;local v139;local v140;local v141;local v142;while true do if (v136==(2 -1)) then v135.CustomPhysicalProperties=PhysicalProperties.new(1817 -(1703 + 114) ,701 -(376 + 325) ,0 -0 ,0 -0 ,0 + 0 );v135.CanCollide=false;v135.CanTouch=false;v135.Massless=true;v135.Parent=workspace;v136=4 -2 ;end if (v136==6) then v141.Attachment1=v140;v142=Instance.new("AlignOrientation",v135);v142.Attachment0=v138;v142.Attachment1=v140;v142.Responsiveness=200;v136=21 -(9 + 5) ;end if (v136==3) then v139.Transparency=377 -(85 + 291) ;v139.Anchored=true;v139.CanCollide=false;v139.CanTouch=false;v139.CanQuery=false;v136=1269 -(243 + 1022) ;end if (v136==8) then v30[v135]={Attachment=v138,Align=v141,AlignOrientation=v142,Torque=v137,AnchorPart=v139,AnchorAttachment=v140};v135.Destroying:Connect(function() if v30[v135] then if v30[v135].AnchorPart then v30[v135].AnchorPart:Destroy();end v30[v135]=nil;end end);v135.AncestryChanged:Connect(function(v243,v244) if  not v244 then if v30[v135] then local v284=0 -0 ;while true do if (v284==(0 + 0)) then if v30[v135].AnchorPart then v30[v135].AnchorPart:Destroy();end v30[v135]=nil;break;end end end end end);break;end if (v136==(1180 -(1123 + 57))) then if ( not v135 or  not v135:IsA("BasePart")) then return;end if v135.Anchored then return;end if v135.Parent:FindFirstChildOfClass("Humanoid") then return;end if v30[v135] then return;end for v245,v246 in ipairs(v135:GetChildren()) do if (v246:IsA("Attachment") or v246:IsA("AlignPosition") or v246:IsA("Torque")) then v246:Destroy();end end v136=1 + 0 ;end if (v136==(259 -(163 + 91))) then v141=Instance.new("AlignPosition",v135);v141.MaxForce=8999999488;v141.MaxVelocity=math.huge;v141.Responsiveness=200;v141.Attachment0=v138;v136=1936 -(1869 + 61) ;end if ((2 + 2)==v136) then v139.Massless=true;v139.CFrame=v135.CFrame;v139.Parent=workspace;v139.Name=v135.Name   .. "__anchor" ;v140=Instance.new("Attachment",v139);v136=17 -12 ;end if (v136==(9 -2)) then v142.MaxTorque=8999999488 -0 ;table.insert(v31,v137);table.insert(v31,v138);table.insert(v31,v141);table.insert(v31,v142);v136=1055 -(67 + 980) ;end if (2==v136) then v137=Instance.new("Torque",v135);v137.Torque=Vector3.new(10000,10000,11474 -(1329 + 145) );v138=Instance.new("Attachment",v135);v139=Instance.new("Part",workspace);v139.Size=Vector3.new(1,972 -(140 + 831) ,1);v136=1853 -(1409 + 441) ;end end end v0.Heartbeat:Connect(function() local v143=0;while true do if (v143==0) then sethiddenproperty(v3,"SimulationRadius",math.huge);for v247,v248 in pairs(Network.Parts) do if v248:IsDescendantOf(Workspace) then v248.Velocity=Network.Velocity;end end break;end end end);local v33=false;local v34,v35,v36,v37;local v38=v3:GetMouse();local v39=nil;local v40=nil;local v41=false;local function v42() local v144=718 -(15 + 703) ;local v145;local v146;local v147;local v148;local v149;local v150;while true do if (v144==1) then v147=417 + 483 ;v148=448 -(262 + 176) ;v144=1723 -(345 + 1376) ;end if (v144==(688 -(198 + 490))) then v145=25;v146=44 -34 ;v144=2 -1 ;end if (v144==4) then v35=v38.Button1Down:Connect(function() if ( not v38.Target or v38.Target.Anchored) then local v271=1206 -(696 + 510) ;while true do if (v271==0) then v19("Telekinesis","Cant grab anchored parts");return;end end end v37=v1.InputBegan:Connect(function(v254,v255) local v256=0 -0 ;while true do if (v256==(1262 -(1091 + 171))) then if v255 then return;end if ( not v33 or  not v39) then return;end v256=1 + 0 ;end if (v256==(3 -2)) then if (v254.KeyCode==Enum.KeyCode.E) then v145=math.clamp(v145 + v148 ,v146,v147);elseif (v254.KeyCode==Enum.KeyCode.Q) then v145=math.clamp(v145-v148 ,v146,v147);elseif (v254.KeyCode==Enum.KeyCode.R) then v149=v149 + Vector3.new(0,v150,0) ;elseif (v254.KeyCode==Enum.KeyCode.F) then v149=v149-Vector3.new(0 -0 ,v150,374 -(123 + 251) ) ;elseif (v254.KeyCode==Enum.KeyCode.T) then v149=v149 + Vector3.new(v150,0 -0 ,0) ;elseif (v254.KeyCode==Enum.KeyCode.G) then v149=v149-Vector3.new(v150,698 -(208 + 490) ,0 + 0 ) ;elseif (v254.KeyCode==Enum.KeyCode.X) then v149=Vector3.new(0 + 0 ,836 -(660 + 176) ,0 + 0 );elseif (v254.KeyCode==Enum.KeyCode.Z) then v41= not v41;end break;end end end);local v249=v38.Target;local v250=v249:FindFirstAncestorOfClass("Model");if v250 then local v272=0;while true do if ((202 -(14 + 188))==v272) then v40=v250;if (v40.PrimaryPart and  not v40.PrimaryPart.Anchored) then v249=v40.PrimaryPart;end break;end end end v39=v249;v32(v39);table.insert(Network.Parts,v39);v34=v0.Heartbeat:Connect(function() if ( not v33 or  not v39:IsDescendantOf(Workspace)) then return;end if  not isnetworkowner(v39) then sethiddenproperty(v3,"SimulationRadius",math.huge);end local v257=v4:ScreenPointToRay(v38.X,v38.Y);local v258=v257.Origin + (v257.Direction * v145) ;local v259=CFrame.Angles(v149.X,v149.Y,v149.Z);if v41 then local v274=675 -(534 + 141) ;local v275;local v276;local v277;while true do if (v274==0) then v275=math.rad(math.random( -(9 + 11),30)) * (4 + 0) ;v276=math.rad(math.random( -30,10 + 0 )) * 3 ;v274=1;end if ((1 -0)==v274) then v277=math.rad(math.random( -(79 -29),56 -36 )) * (2 + 0) ;v259*=CFrame.Angles(v275,v276,v277) v274=2;end if (v274==(2 + 0)) then v259*=CFrame.Angles(v275,v276,v277) break;end end else v259=CFrame.Angles(v149.X,v149.Y,v149.Z);end v30[v39].AnchorPart.CFrame=CFrame.new(v258) * v259 ;end);end);v36=v38.Button1Up:Connect(function() v40=nil;v39=nil;v145=421 -(115 + 281) ;v146=23 -13 ;v147=900;v148=9 + 1 ;if v34 then local v273=0 -0 ;while true do if (v273==0) then v34:Disconnect();v34=nil;break;end end end if v37 then v37:Disconnect();v37=nil;end end);break;end if ((10 -7)==v144) then v33=true;setsimulationradius(1867 -(550 + 317) ,1444 -444 );v144=4 -0 ;end if (v144==(5 -3)) then v149=Vector3.new(285 -(134 + 151) ,1665 -(970 + 695) ,0);v150=math.rad(28 -13 );v144=1993 -(582 + 1408) ;end end end local function v43() local v151=0 -0 ;while true do if (v151==2) then if v35 then v35:Disconnect();end if v36 then v36:Disconnect();end if v37 then v37:Disconnect();end v151=3;end if (v151==(0 -0)) then v33=false;TelekinesisDistance=94 -69 ;MinDistance=1834 -(1195 + 629) ;v151=1;end if ((3 -0)==v151) then v39=nil;if v40 then end v40=nil;break;end if (v151==(242 -(187 + 54))) then MaxDistance=1680 -(162 + 618) ;DistanceStep=8 + 2 ;if v34 then v34:Disconnect();end v151=2 + 0 ;end end end local v44={};local function v45() v12("Repell",v0.Heartbeat,function() local v177=0 -0 ;local v178;local v179;local v180;local v181;while true do if (v177==0) then v178=16 -6 ;v179=v7(v3).Position;v177=1 + 0 ;end if ((1637 -(1373 + 263))==v177) then v180=Region3.new(v179-Vector3.new(v178,v178,v178) ,v179 + Vector3.new(v178,v178,v178) );v181=workspace:FindPartsInRegion3(v180,nil,math.huge);v177=1002 -(451 + 549) ;end if ((1 + 1)==v177) then for v261,v262 in pairs(v181) do if ( not v262.Anchored and  not v262:IsDescendantOf(v6(v3))) then local v278=0;local v279;local v280;local v281;while true do if (v278==(0 -0)) then v279=(v262.Position-v179).Unit;v280=v262.Position + (v279 * 10) ;v278=1;end if (v278==2) then v281.Velocity=v279 * 50 ;v281.Parent=v262;v278=4 -1 ;end if (v278==(1385 -(746 + 638))) then v281=Instance.new("BodyVelocity");v281.MaxForce=Vector3.new(8999999488,8999999488 -0 ,8999999488);v278=343 -(218 + 123) ;end if (v278==(1584 -(1535 + 46))) then v44[v262]=v281;break;end end end end for v263,v264 in pairs(v44) do local v265=0 + 0 ;local v266;while true do if (v265==(0 + 0)) then v266=(v263.Position-v179).Magnitude;if (v266>v178) then local v295=560 -(306 + 254) ;while true do if (v295==(0 + 0)) then v264:Destroy();v44[v263]=nil;break;end end end break;end end end break;end end end);end local function v46(v152,v153) v32(v152);v30[v152].AnchorPart.CFrame=v153;end local function v47(v155) for v182,v183 in pairs(workspace:GetDescendants()) do if (v183:IsA("BasePart") and  not v183.Anchored and  not v2:GetPlayerFromCharacter(v183)) then v46(v183,v155);end end end local function v48() local v156=v2:CreateHumanoidModelFromDescription(v2:GetHumanoidDescriptionFromUserId(v3.UserId),Enum.HumanoidRigType.R6);v156.HumanoidRootPart.CFrame=v7(v3).CFrame;v15(true);v156.Parent=game:GetService("Workspace");v3.Character=v156;v156.Name=v3.Name   .. "__fake" ;v17(v156.Humanoid);return v156;end local v49=v20("Window",0 -0 ,"LUNA Hub","powered by Rayfield","Hub","Default",Enum.KeyCode.RightAlt);if replicatesignal then local v184=v21(v49,"Replicate signal");local v185=v22(v184,"Instant respawn",function() v15(false);end);local v186=v22(v184,"Break joints",function() replicatesignal(v8(v3).ServerBreakJoints);end);local v187=v23(v184,"Perma death",false,"PermaDeath",function(v196) if (v196==true) then v15(true);else v15();end end);local v188=v23(v184,"Invisible rig",false,"InvisibleRig",function(v197) local v198=1467 -(899 + 568) ;local v199;while true do if (v198==(0 + 0)) then v199=nil;if (v197==true) then v199=v48();else local v282=0;while true do if (v282==(0 -0)) then if v199 then v199:Destroy();end v15();break;end end end break;end end end);end local v50=v21(v49,"Player");local v51=nil;local v52=v25(v50,"Player",v16(),v16()[v3.Name],false,"TPSelector",function(v162) v51=v162[604 -(268 + 335) ];end);local v53=v22(v50,"Tp",function() local v164=290 -(60 + 230) ;local v165;while true do if (v164==(572 -(426 + 146))) then v165=v7(v2:FindFirstChild(v51));if  not v165 then return;end v164=1;end if ((1 + 0)==v164) then v7(v3).CFrame=v165.CFrame;break;end end end);v2.PlayerAdded:Connect(function() v52:Refresh(v16());end);v2.PlayerRemoving:Connect(function() v52:Refresh(v16());end);local v54=v21(v49,"Local player");local v55;local v56=v8(v3).WalkSpeed;local v57=v24(v54,"Speed",{0,576 -376 },10,"Speed",v56,"SpeedSelector",function(v166) v55=v166;end);local v58=v23(v54,"Toggle speed",false,"SpeedToggle",function(v167) if (v167==true) then v8(v3).WalkSpeed=v55;else v8(v3).WalkSpeed=v56;end end);local v59;local v60=v8(v3).JumpPower;local v61=v24(v54,"Jump power",{1024 -(706 + 318) ,200},1261 -(721 + 530) ,"jump power",v60,"JumpSelector",function(v168) v59=v168;end);local v62=v23(v54,"Toggle jump power",false,"JumpToggle",function(v169) if (v169==true) then v8(v3).JumpPower=v59;else v8(v3).JumpPower=v60;end end);local v63=v23(v54,"Toggle collisions",false,"CollisionToggle",function(v170) if (v170==true) then v12("Collision",v0.Heartbeat,function() v26(v6(v3),false);end);else local v204=1271 -(945 + 326) ;while true do if (v204==(0 -0)) then v13("Collision");v26(v6(v3),true);break;end end end end);local v64=v23(v54,"Antifling",false,"AntiFlingToggle",function(v171) if (v171==true) then v12("AntiFling",v0.Heartbeat,function() for v252,v253 in pairs(v2:GetPlayers()) do v26(v6(v253),false);end end);else v13("AntiFling");for v235,v236 in pairs(v2:GetPlayers()) do v26(v6(v236),true);end end end);local v65=v21(v49,"Network");local v66=v23(v65,"Telekinesis",false,"TelekinesisToggle",function(v172) if (v172==true) then v42();else v43();end end);local v67=v23(v65,"Women (parts) repellent",false,"PartsRepellentToggle",function(v173) if (v173==true) then v45();else v13("Repell");end end);if (game.GameId==7326934954) then local v189=v21(v49,"99 Nights");local v190=game:GetService("Workspace"):FindFirstChild("Map"):FindFirstChild("Campground"):FindFirstChild("MainFire");local v191=game:GetService("Workspace"):FindFirstChild("Items");local v192=v190:GetAttribute("FuelRemaining");local v193=v190:GetAttribute("FuelTarget");local v194=v22(v189,"Bring all",function() for v237,v238 in pairs(v191:GetDescendants()) do if (v238:IsA("BasePart") or v238:IsA("Part") or v238:IsA("MeshPart")) then if ( not v238.Anchored and (v238:FindFirstAncestorOfClass("Model").PrimaryPart==v238)) then v32(v238);v30[v238].AnchorPart.CFrame=v7(v3).CFrame + Vector3.new(0 + 0 ,10,0) ;task.spawn(function() local v286=700 -(271 + 429) ;while true do if (v286==(0 + 0)) then task.wait(1500.5 -(1408 + 92) );for v298,v299 in pairs(v30[v238]) do local v300=0;while true do if (v300==0) then v238.CanCollide=true;v299:Destroy();break;end end end break;end end end);end end end end);end
+local Connections = {}
+
+local function Connect(name, event, func)
+    if Connections[name] then
+        Connections[name]:Disconnect()
+    end
+    Connections[name] = event:Connect(func)
+end
+
+local function Disconnect(name)
+    if Connections[name] then
+        Connections[name]:Disconnect()
+        Connections[name] = nil
+    end
+end
+
+local function DisconnectAll()
+    for k, v in pairs(Connections) do
+        v:Disconnect()
+    end
+    table.clear(Connections)
+end
+
+local function permaDeath(v)
+    local waitTime
+    if v == nil then replicatesignal(LocalPlayer.ConnectDiedSignalBackend) end
+    if v then
+        waitTime = Players.RespawnTime + .1
+    else
+        waitTime = Players.RespawnTime - .1
+    end
+    replicatesignal(LocalPlayer.ConnectDiedSignalBackend)
+    wait(waitTime)
+    replicatesignal(LocalPlayer.Kill)
+end
+
+local function getPlayers()
+    local PlayersTable = {}
+    table.clear(PlayersTable)
+    for i, v in pairs(Players:GetPlayers()) do
+        table.insert(PlayersTable, v.Name)
+    end
+    return PlayersTable
+end
+
+local function changeCameraSubject(subject)
+    Camera.CameraSubject = subject
+end
+
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local function Notify(Title, Content, Duration, Image)
+    Rayfield:Notify({
+        Title = Title,
+        Content = Content,
+        Duration = Duration,
+        Image = Image
+    })
+end
+
+local function CreateWindow(Name, Icon, LoadingTitle, LoadingSubtitle, ShowText, Theme, ToggleUIKeybind)
+    local Window = Rayfield:CreateWindow({
+        Name = Name,
+        Icon = Icon,
+        LoadingTitle = LoadingTitle,
+        LoadingSubtitle = LoadingSubtitle,
+        ShowText = ShowText,
+        Theme = Theme,
+        ToggleUIKeybind = ToggleUIKeybind
+    })
+    return Window
+end
+
+local function Tab(Window, Title, Image)
+    if not Image then Image = nil end
+    local Tab = Window:CreateTab(Title, Image)
+    return Tab
+end
+
+local function Button(Tab, Name, Callback)
+    local Button = Tab:CreateButton({
+        Name = Name,
+        Callback = Callback
+    })
+    return Button
+end
+
+local function Toggle(Tab, Name, CurrentValue, Flag, Callback)
+    local Toggle = Tab:CreateToggle({
+        Name = Name,
+        CurrentValue = CurrentValue,
+        Flag = Flag,
+        Callback = Callback
+    })
+    return Toggle
+end
+
+local function Slider(Tab, Name, Range, Increment, Suffix, CurrentValue, Flag, Callback)
+    local Slider = Tab:CreateSlider({
+        Name = Name,
+        Range = Range,
+        Increment = Increment,
+        Suffix = Suffix,
+        CurrentValue = CurrentValue,
+        Flag = Flag,
+        Callback = Callback
+    })
+    return Slider
+end
+
+local function Dropdown(Tab, Name, Options, CurrentOption, MultipleOptions, Flag, Callback)
+    local Dropdown = Tab:CreateDropdown({
+        Name = Name,
+        Options = Options,
+        CurrentOption = CurrentOption,
+        MultipleOptions = MultipleOptions,
+        Flag = Flag,
+        Callback = Callback
+    })
+    return Dropdown
+end
+
+-- Misc
+local function ChangeCollisionOfModel(model, state)
+    if not model:IsA("Model") then return end
+
+    for i, v in pairs(model:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = state
+            v.CanQuery = state
+            v.CanTouch = state
+        end
+    end
+end
+
+-- Network stuff
+getgenv().Network = getgenv().Network or {}
+Network.Parts = Network.Parts or {}
+Network.Velocity = Vector3.new(15,15,15)
+
+local ForcedParts = {}
+local Joints = {}
+
+local function ForcePart(part)
+	if not part or not part:IsA("BasePart") then return end
+    if part.Anchored then return end
+    if part.Parent:FindFirstChildOfClass("Humanoid") then return end
+    if ForcedParts[part] then return end
+
+	for _, obj in ipairs(part:GetChildren()) do
+		if obj:IsA("Attachment") or obj:IsA("AlignPosition") or obj:IsA("Torque") then
+			obj:Destroy()
+		end
+	end
+
+	part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+	part.CanCollide = false
+    part.CanTouch = false
+	part.Massless = true
+    part.Parent = workspace
+	local torque = Instance.new("Torque", part)
+	torque.Torque = Vector3.new(1e4, 1e4, 1e4)
+
+	local attachment = Instance.new("Attachment", part)
+
+	local anchor = Instance.new("Part", workspace)
+	anchor.Size = Vector3.new(1,1,1)
+	anchor.Transparency = 1
+	anchor.Anchored = true
+	anchor.CanCollide = false
+	anchor.CanTouch = false
+	anchor.CanQuery = false
+	anchor.Massless = true
+	anchor.CFrame = part.CFrame
+	anchor.Parent = workspace
+    anchor.Name = part.Name .. "__anchor"
+
+	local anchorAttachment = Instance.new("Attachment", anchor)
+
+	local align = Instance.new("AlignPosition", part)
+	align.MaxForce = 9e9
+	align.MaxVelocity = math.huge
+	align.Responsiveness = 200
+	align.Attachment0 = attachment
+	align.Attachment1 = anchorAttachment
+
+    local AlignOrientation = Instance.new("AlignOrientation", part)
+    AlignOrientation.Attachment0 = attachment
+    AlignOrientation.Attachment1 = anchorAttachment
+    AlignOrientation.Responsiveness = 200
+    AlignOrientation.MaxTorque = 9e9
+
+    table.insert(Joints, torque)
+    table.insert(Joints, attachment)
+    table.insert(Joints, align)
+    table.insert(Joints, AlignOrientation)
+
+    ForcedParts[part] = {Attachment = attachment, Align = align, AlignOrientation = AlignOrientation, Torque = torque, AnchorPart = anchor, AnchorAttachment = anchorAttachment}
+    part.Destroying:Connect(function()
+        if ForcedParts[part] then
+            if ForcedParts[part].AnchorPart then
+                ForcedParts[part].AnchorPart:Destroy()
+            end
+            ForcedParts[part] = nil
+        end
+    end)
+    part.AncestryChanged:Connect(function(_, parent)
+        if not parent then
+            if ForcedParts[part] then
+                if ForcedParts[part].AnchorPart then
+                    ForcedParts[part].AnchorPart:Destroy()
+                end
+                ForcedParts[part] = nil
+            end
+        end
+    end)
+end
+
+RunService.Heartbeat:Connect(function()
+	sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+	for _, part in pairs(Network.Parts) do
+		if part:IsDescendantOf(Workspace) then
+			part.Velocity = Network.Velocity
+		end
+	end
+end)
+
+local TelekinesisEnabled = false
+local TelekinesisConn, MouseDownConn, MouseUpConn, InputConn
+local Mouse = LocalPlayer:GetMouse()
+local HeldPart = nil
+local HeldModel = nil
+
+local Spinning = false
+
+local function EnableTelekinesis()
+    local TelekinesisDistance = 25
+    local MinDistance = 10
+    local MaxDistance = 900
+    local DistanceStep = 10
+
+    local Rotation = Vector3.new(0, 0, 0)
+    local RotationSpeed = math.rad(15)
+
+	TelekinesisEnabled = true
+    setsimulationradius(1000, 1000)
+	MouseDownConn = Mouse.Button1Down:Connect(function()
+		if not Mouse.Target or Mouse.Target.Anchored then
+            Notify("Telekinesis", "Cant grab anchored parts")
+            return
+        end
+        InputConn = UserInputService.InputBegan:Connect(function(input, processed)
+            if processed then return end
+            if not TelekinesisEnabled or not HeldPart then return end
+
+            if input.KeyCode == Enum.KeyCode.E then
+                TelekinesisDistance = math.clamp(TelekinesisDistance + DistanceStep, MinDistance, MaxDistance)
+            elseif input.KeyCode == Enum.KeyCode.Q then
+                TelekinesisDistance = math.clamp(TelekinesisDistance - DistanceStep, MinDistance, MaxDistance)
+            elseif input.KeyCode == Enum.KeyCode.R then
+                Rotation = Rotation + Vector3.new(0, RotationSpeed, 0)
+            elseif input.KeyCode == Enum.KeyCode.F then
+                Rotation = Rotation - Vector3.new(0, RotationSpeed, 0)
+            elseif input.KeyCode == Enum.KeyCode.T then
+                Rotation = Rotation + Vector3.new(RotationSpeed, 0, 0)
+            elseif input.KeyCode == Enum.KeyCode.G then
+                Rotation = Rotation - Vector3.new(RotationSpeed, 0, 0)
+            elseif input.KeyCode == Enum.KeyCode.X then
+                Rotation = Vector3.new(0, 0, 0)
+            elseif input.KeyCode == Enum.KeyCode.Z then
+                Spinning = not Spinning
+            end
+        end)
+		local part = Mouse.Target
+        local model = part:FindFirstAncestorOfClass("Model")
+        --[[if model then
+            HeldModel = model
+            ChangeCollisionOfModel(HeldModel, false)
+            if HeldModel.PrimaryPart and not HeldModel.PrimaryPart.Anchored then
+                part = HeldModel.PrimaryPart
+            end
+        end]]
+        HeldPart = part
+        for _, joint in pairs(HeldPart:GetJoints()) do
+            if not table.find(Joints, joint) then
+                joint.Enabled = false
+           end
+        end
+		ForcePart(HeldPart)
+		table.insert(Network.Parts, HeldPart)
+		TelekinesisConn = RunService.Heartbeat:Connect(function()
+            if not TelekinesisEnabled or not HeldPart:IsDescendantOf(Workspace) then return end
+			if not isnetworkowner(HeldPart) then
+				sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+			end
+			local ray = Camera:ScreenPointToRay(Mouse.X, Mouse.Y)
+			local goalPos = ray.Origin + ray.Direction * TelekinesisDistance
+            local rotationCFrame = CFrame.Angles(Rotation.X, Rotation.Y, Rotation.Z)
+            if Spinning then
+                local randomX = math.rad(math.random(-20, 30)) * 4
+                local randomY = math.rad(math.random(-30, 10)) * 3
+                local randomZ = math.rad(math.random(-50, 20)) * 2
+                rotationCFrame *= CFrame.Angles(randomX, randomY, randomZ) rotationCFrame *= CFrame.Angles(randomX, randomY, randomZ)
+            else
+                rotationCFrame = CFrame.Angles(Rotation.X, Rotation.Y, Rotation.Z)
+            end
+            ForcedParts[HeldPart].AnchorPart.CFrame = CFrame.new(goalPos) * rotationCFrame
+            --ForcedParts[part].AnchorPart.CFrame = CFrame.new(goalPos)
+		end)
+	end)
+	MouseUpConn = Mouse.Button1Up:Connect(function()
+        --[[if HeldModel then
+            ChangeCollisionOfModel(HeldModel, true)
+        end]]
+        HeldModel = nil
+        HeldPart = nil
+        TelekinesisDistance = 25
+        MinDistance = 10
+        MaxDistance = 900
+        DistanceStep = 10
+		if TelekinesisConn then
+			TelekinesisConn:Disconnect()
+			TelekinesisConn = nil
+		end
+        if InputConn then
+            InputConn:Disconnect()
+            InputConn = nil
+        end
+	end)
+end
+
+
+local function DisableTelekinesis()
+	TelekinesisEnabled = false
+    TelekinesisDistance = 25
+    MinDistance = 10
+    MaxDistance = 900
+    DistanceStep = 10
+	if TelekinesisConn then TelekinesisConn:Disconnect() end
+	if MouseDownConn then MouseDownConn:Disconnect() end
+	if MouseUpConn then MouseUpConn:Disconnect() end
+    if InputConn then InputConn:Disconnect() end
+	HeldPart = nil
+    if HeldModel then
+        --ChangeCollisionOfModel(HeldModel, true)
+    end
+    HeldModel = nil
+end
+
+local bodyVelocities = {}
+local function PartsRepellent()
+    Connect("Repell", RunService.Heartbeat, function()
+        local radius = 10
+        local origin = getRoot(LocalPlayer).Position
+
+        local region = Region3.new(origin - Vector3.new(radius, radius, radius), origin + Vector3.new(radius, radius, radius))
+
+        local partsInRadius = workspace:FindPartsInRegion3(region, nil, math.huge)
+
+        for _, part in pairs(partsInRadius) do
+            if not part.Anchored and not part:IsDescendantOf(getChar(LocalPlayer)) then
+                local dir = (part.Position - origin).Unit
+
+                local newPos = part.Position + dir * 10
+
+                local bodyVelocity = Instance.new("BodyVelocity")
+                bodyVelocity.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+                bodyVelocity.Velocity = dir * 50
+                bodyVelocity.Parent = part
+                bodyVelocities[part] = bodyVelocity
+            end
+        end
+
+        for part, bodyVelocity in pairs(bodyVelocities) do
+            local dist = (part.Position - origin).Magnitude
+
+            if dist > radius then
+                bodyVelocity:Destroy()
+                bodyVelocities[part] = nil
+            end
+        end
+    end)
+end
+
+local function MovePart(part, cframe)
+    ForcePart(part)
+    ForcedParts[part].AnchorPart.CFrame = cframe
+end
+
+local function MoveAllParts(cframe)
+    for i, v in pairs(workspace:GetDescendants()) do
+        if v:IsA("BasePart") and not v.Anchored and not Players:GetPlayerFromCharacter(v) then
+            MovePart(v, cframe)
+        end
+    end
+end
+
+local function CreateInvisibleRig()
+    local rig = Players:CreateHumanoidModelFromDescription(Players:GetHumanoidDescriptionFromUserId(LocalPlayer.UserId), Enum.HumanoidRigType.R6)
+    rig.HumanoidRootPart.CFrame = getRoot(LocalPlayer).CFrame
+    permaDeath(true)
+    rig.Parent = game:GetService("Workspace")
+    LocalPlayer.Character = rig
+    rig.Name = LocalPlayer.Name .. "__fake"
+    changeCameraSubject(rig.Humanoid)
+    return rig
+end
+
+local MainWindow = CreateWindow("Window", 0, "LUNA Hub", "powered by Rayfield", "Hub", "Default", Enum.KeyCode.RightAlt)
+
+-- Replicate signal stuff
+if replicatesignal then
+    local ReplicateTab = Tab(MainWindow, "Replicate signal")
+    local InstantRespawn = Button(ReplicateTab, "Instant respawn", function()
+        permaDeath(false)
+    end)
+    local BreakJoints = Button(ReplicateTab, "Break joints", function()
+        replicatesignal(getHumanoid(LocalPlayer).ServerBreakJoints)
+    end)
+    local PermaDeath = Toggle(ReplicateTab, "Perma death", false, "PermaDeath", function(Value)
+        if Value == true then
+            permaDeath(true)
+        else
+            permaDeath()
+        end
+    end)
+    local InvisibleRig = Toggle(ReplicateTab, "Invisible rig", false, "InvisibleRig", function(Value)
+        local rig
+        if Value == true then
+            rig = CreateInvisibleRig()
+        else
+            if rig then
+                rig:Destroy()
+            end
+            permaDeath()
+        end
+    end)
+end
+
+--Players stuff
+
+local PlayerTab = Tab(MainWindow, "Player")
+
+local selectedPlayer = nil
+local PlayerSelector = Dropdown(PlayerTab, "Player", getPlayers(), getPlayers()[LocalPlayer.Name], false, "TPSelector", function(Options)
+    selectedPlayer = Options[1]
+end)
+
+local TPPlayer = Button(PlayerTab, "Tp", function()
+    local root = getRoot(Players:FindFirstChild(selectedPlayer))
+    if not root then return end
+    getRoot(LocalPlayer).CFrame = root.CFrame
+end)
+
+Players.PlayerAdded:Connect(function()
+    PlayerSelector:Refresh(getPlayers())
+end)
+
+Players.PlayerRemoving:Connect(function()
+    PlayerSelector:Refresh(getPlayers())
+end)
+
+--Local player stuff
+local LocalPlayerTab = Tab(MainWindow, "Local player")
+
+local Speed
+local BaseSpeed = getHumanoid(LocalPlayer).WalkSpeed
+local SpeedSelector = Slider(LocalPlayerTab, "Speed", {0, 200}, 10, "Speed", BaseSpeed, "SpeedSelector", function(Value)
+    Speed = Value
+end)
+local SpeedToggle = Toggle(LocalPlayerTab, "Toggle speed", false, "SpeedToggle", function(Value)
+    if Value == true then
+        getHumanoid(LocalPlayer).WalkSpeed = Speed
+    else
+        getHumanoid(LocalPlayer).WalkSpeed = BaseSpeed
+    end
+end)
+
+local JumpPower
+local BaseJumpPower = getHumanoid(LocalPlayer).JumpPower
+local JumpPowerSelector = Slider(LocalPlayerTab, "Jump power", {0, 200}, 10, "jump power", BaseJumpPower, "JumpSelector", function(Value)
+    JumpPower = Value
+end)
+local JumpPowerToggle = Toggle(LocalPlayerTab, "Toggle jump power", false, "JumpToggle", function(Value)
+    if Value == true then
+        getHumanoid(LocalPlayer).JumpPower = JumpPower
+    else
+        getHumanoid(LocalPlayer).JumpPower = BaseJumpPower
+    end
+end)
+
+local ToggleCollisions = Toggle(LocalPlayerTab, "Toggle collisions", false, "CollisionToggle", function(Value)
+    if Value == true then
+        Connect("Collision", RunService.Heartbeat, function()
+            ChangeCollisionOfModel(getChar(LocalPlayer), false)
+        end)
+    else
+        Disconnect("Collision")
+        ChangeCollisionOfModel(getChar(LocalPlayer), true)
+    end
+end)
+
+
+local ToggleAntiFling = Toggle(LocalPlayerTab, "Antifling", false, "AntiFlingToggle", function(Value)
+    if Value == true then
+        Connect("AntiFling", RunService.Heartbeat, function()
+            for _, player in pairs(Players:GetPlayers()) do
+                ChangeCollisionOfModel(getChar(player), false)
+            end
+        end)
+    else
+        Disconnect("AntiFling")
+        for _, player in pairs(Players:GetPlayers()) do
+            ChangeCollisionOfModel(getChar(player), true)
+        end
+    end
+end)
+
+--Network stuff
+local NetworkTab = Tab(MainWindow, "Network")
+
+local TelekinesisToggle = Toggle(NetworkTab, "Telekinesis", false, "TelekinesisToggle", function(Value)
+    if Value == true then
+        EnableTelekinesis()
+    else
+        DisableTelekinesis()
+    end
+end)
+
+local PartsRepellentToggle = Toggle(NetworkTab, "Women (parts) repellent", false, "PartsRepellentToggle", function(Value)
+    if Value == true then
+        PartsRepellent()
+    else
+        Disconnect("Repell")
+    end
+end)
+
+--[[local MoveAllPartsToPlayerLoop = Toggle(NetworkTab, "Loop move all parts to player", false, "MoveAllPartsToPlayerLoopToggle", function(Value)
+    if Value == true then
+        Connect("MoveAllPartsToPlayerLoop", RunService.Heartbeat, function()
+            local root = getRoot(Players:FindFirstChild(selectedPlayer))
+            if not selectedPlayer then Notify("Error!", "Select a player from player tab") Disconnect("MoveAllPartsToPlayerLoop") end
+            if not root then Notify("Error!", "RootPart not found") Disconnect("MoveAllPartsToPlayerLoop") end
+            MoveAllParts(root.CFrame)
+        end)
+    else
+        Disconnect("MoveAllPartsToPlayerLoop")
+    end
+end)]]
+
+--[[local MoveAllPartsToPlayer = Button(NetworkTab, "Move all parts to player", function()
+    local root = getRoot(Players:FindFirstChild(selectedPlayer))
+    if not selectedPlayer then Notify("Error!", "Select a player from player tab") end
+    if not root then Notify("Error!", "RootPart not found") end
+
+    MoveAllParts(root.CFrame)
+end)]]
+
+if game.GameId == 7326934954 then
+    local NightsTab = Tab(MainWindow, "99 Nights")
+	local CampFire = game:GetService("Workspace"):FindFirstChild("Map"):FindFirstChild("Campground"):FindFirstChild("MainFire")
+	local Items = game:GetService("Workspace"):FindFirstChild("Items")
+	local FuelRemaining = CampFire:GetAttribute("FuelRemaining")
+	local FuelTarget = CampFire:GetAttribute("FuelTarget")
+    local BringAll = Button(NightsTab, "Bring all", function()
+        for i, v in pairs(Items:GetDescendants()) do
+            if v:IsA("BasePart") or v:IsA("Part") or v:IsA("MeshPart") then
+                if not v.Anchored and v:FindFirstAncestorOfClass("Model").PrimaryPart == v then
+                    ForcePart(v)
+                    ForcedParts[v].AnchorPart.CFrame = getRoot(LocalPlayer).CFrame + Vector3.new(0, 10, 0)
+                    task.spawn(function()
+                        task.wait(.5)
+                        for _, joint in pairs(ForcedParts[v]) do
+                            v.CanCollide = true
+                            joint:Destroy()
+                        end
+                    end)
+                end
+            end
+        end
+    end)
+end
