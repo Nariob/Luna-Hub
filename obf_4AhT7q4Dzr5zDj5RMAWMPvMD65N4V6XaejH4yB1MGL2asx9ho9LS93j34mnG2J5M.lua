@@ -315,7 +315,7 @@ local function EnableTelekinesis() -- this function has 1000 gazillion stuff it 
                 local randomX = math.rad(math.random(-20, 30)) * 4
                 local randomY = math.rad(math.random(-30, 10)) * 3
                 local randomZ = math.rad(math.random(-50, 20)) * 2
-                rotationCFrame *= CFrame.Angles(randomX, randomY, randomZ) rotationCFrame *= CFrame.Angles(randomX, randomY, randomZ)
+                rotationCFrame *= CFrame.Angles(randomX, randomY, randomZ) -- i had this twice in the same line lol. its removed now
             else
                 rotationCFrame = CFrame.Angles(Rotation.X, Rotation.Y, Rotation.Z)
             end
