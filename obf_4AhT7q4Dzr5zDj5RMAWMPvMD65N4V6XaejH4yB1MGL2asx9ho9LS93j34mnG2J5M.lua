@@ -302,7 +302,7 @@ local function EnableTelekinesis() -- this function has 1000 gazillion stuff it 
            end
         end
 		ForcePart(HeldPart)
-		table.insert(Network.Parts, HeldPart)
+		table.insert(Network.Parts, HeldPart) -- so, uhhh to add model support, comment this line and comment the for loop above. be aware ownership distance and stability will be affected by this (which is why i have this line uncommented).
 		TelekinesisConn = RunService.Heartbeat:Connect(function()
             if not TelekinesisEnabled or not HeldPart:IsDescendantOf(Workspace) then return end
 			if not isnetworkowner(HeldPart) then
