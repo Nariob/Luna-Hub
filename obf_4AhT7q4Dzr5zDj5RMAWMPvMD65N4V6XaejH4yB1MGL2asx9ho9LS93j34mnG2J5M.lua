@@ -507,7 +507,7 @@ end)
 
 local ToggleCollisions = Toggle(LocalPlayerTab, "Toggle collisions", false, "CollisionToggle", function(Value)
     if Value == true then
-        Connect("Collision", RunService.Heartbeat, function()
+        Connect("Collision", RunService.Heartbeat, function() -- i shouldnt use runservice here... i just added it cause my torso kept changing its collision to true
             ChangeCollisionOfModel(getChar(LocalPlayer), false)
         end)
     else
@@ -519,7 +519,7 @@ end)
 
 local ToggleAntiFling = Toggle(LocalPlayerTab, "Antifling", false, "AntiFlingToggle", function(Value)
     if Value == true then
-        Connect("AntiFling", RunService.Heartbeat, function()
+        Connect("AntiFling", RunService.Heartbeat, function() -- the same here ^^
             for _, player in pairs(Players:GetPlayers()) do
                 ChangeCollisionOfModel(getChar(player), false)
             end
