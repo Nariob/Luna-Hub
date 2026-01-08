@@ -151,7 +151,7 @@ end
 -- this was directly taken from luka superring lol, credits to him
 getgenv().Network = getgenv().Network or {}
 Network.Parts = Network.Parts or {}
-Network.Velocity = Vector3.new(15,15,15)
+Network.Velocity = Vector3.new(15,15,15) -- ts is used to mantain ownership :D
 
 local ForcedParts = {}
 local Joints = {}
@@ -167,7 +167,7 @@ local function ForcePart(part)
 			obj:Destroy()
 		end
 	end
-
+	-- we use objects that apply physics cause yes. its easier to move them that way (and also cause it helps to mantain ownership (im not to sure tho))
 	part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
 	part.CanCollide = false
     part.CanTouch = false
@@ -178,7 +178,7 @@ local function ForcePart(part)
 
 	local attachment = Instance.new("Attachment", part)
 
-	local anchor = Instance.new("Part", workspace)
+	local anchor = Instance.new("Part", workspace) -- the thing we are moving
 	anchor.Size = Vector3.new(1,1,1)
 	anchor.Transparency = 1
 	anchor.Anchored = true
@@ -192,14 +192,14 @@ local function ForcePart(part)
 
 	local anchorAttachment = Instance.new("Attachment", anchor)
 
-	local align = Instance.new("AlignPosition", part)
+	local align = Instance.new("AlignPosition", part) -- the thing that moves the part to the part we are moving
 	align.MaxForce = 9e9
 	align.MaxVelocity = math.huge
 	align.Responsiveness = 200
 	align.Attachment0 = attachment
 	align.Attachment1 = anchorAttachment
 
-    local AlignOrientation = Instance.new("AlignOrientation", part)
+    local AlignOrientation = Instance.new("AlignOrientation", part) -- the thing that orientates the part to the part we are moving
     AlignOrientation.Attachment0 = attachment
     AlignOrientation.Attachment1 = anchorAttachment
     AlignOrientation.Responsiveness = 200
@@ -235,7 +235,7 @@ RunService.Heartbeat:Connect(function()
 	sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge) -- this doesnt change a thing, but it doesnt hurt noone, so im just leaving it there (also, it should use setsimulationradius. i was half asleep when i did this)
 	for _, part in pairs(Network.Parts) do
 		if part:IsDescendantOf(Workspace) then
-			part.Velocity = Network.Velocity
+			part.Velocity = Network.Velocity -- we just set the part velocity to maintain ownership.
 		end
 	end
 end)
